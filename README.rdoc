@@ -1,6 +1,31 @@
 = historic
 
-Description goes here.
+A gem for tracking changes of a model in a history table.  
+Allows fields to be marked as trigger fields that will initiate a copy of the record back to the history table.
+The history table rows will be created with the data as it existed before the current modifications were made.
+
+Usage (on the object to create history for):
+=begin 
+	acts_as_historic :on_change_of=>:field_1, :after => :some_method
+=end
+
+Usage (on the history object):
+=begin
+	acts_as_historic_record
+=end
+
+By default, the History Record object is assumed to be the name of the main object plus History so:
+For an object Foo, the History Record would be in a table called FooHistory.
+This can be overridden using the class_name option:
+=begin
+	acts_as_historic :class_name=>"BarHistory"
+=end
+
+Options:
+	* :on_change_of  - A list of fields to monitor for change.  When any of these fields changes, a history row is created.
+	* :on_initialize - Create a History Record indicating the initial creation of the main object.
+	* :class_name    - Specify a different History Record class name.
+	* :after         - A symbol or proc to be called on completion of the history row being created.
 
 == Copyright
 
