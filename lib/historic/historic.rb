@@ -22,8 +22,8 @@ module ActiveRecord
       
       module ClassMethods
 
-        def historic_table_class
-          @historic_table_class
+        def historic_record_class
+          @historic_record_class
         end
 
         def historic_options
@@ -36,7 +36,7 @@ module ActiveRecord
         # Ensure that on_change_of is an array.
         #
         def historic_extract_options(options)
-          @historic_table_class = (options.delete(:class_name) || "#{self.to_s}History").constantize  
+          @historic_record_class = (options.delete(:class_name) || "#{self.to_s}History").constantize  
           
           options[:on_change_of] = [options[:on_change_of]] if options[:on_change_of] && !options[:on_change_of].is_a?(Array)
           @historic_options = options 
@@ -72,12 +72,16 @@ module ActiveRecord
         # Copy the current item to the HistoryRecord object and execute the :after hook, if it exists
         #        
         def historic_copy_to_history
-          self.class.historic_table_class.__send__("create_history_from_current!", self)
+          historic_record_class.create_history_from_current!(self)
           historic_options[:after].to_proc.call(self) if historic_options[:after]
         end
         
         def historic_options
           self.class.historic_options
+        end
+        
+        def historic_record_class
+          self.class.historic_record_class
         end
       end #InstanceMethods      
     end #Historic
