@@ -35,15 +35,15 @@ class HistoricTest < Test::Unit::TestCase
             @item_history = HistoricItemHistory.find_by_field_1_and_field_2_and_field_3(@old_item.field_1, @old_item.field_2, @old_item.field_3)
           end
 
-          should "copy a from the HistoricItem" do
+          should "copy field_1 from the HistoricItem" do
             assert_equal @old_item.field_1, @item_history.field_1.to_i
           end
 
-          should "copy b from the HistoricItem" do
+          should "copy field_2 from the HistoricItem" do
             assert_equal @old_item.field_2, @item_history.field_2.to_i
           end
 
-          should "copy c from the HistoricItem" do
+          should "copy field_3 from the HistoricItem" do
             assert_equal @old_item.field_3, @item_history.field_3.to_i
           end
 
@@ -59,15 +59,15 @@ class HistoricTest < Test::Unit::TestCase
         @item_history = HistoricItemHistory.create_history_from_current(@item)
       end
 
-      should "copy a from the HistoricItem" do
+      should "copy field_1 from the HistoricItem" do
         assert_equal @item.field_1, @item_history.field_1
       end
 
-      should "copy b from the HistoricItem" do
+      should "copy field_2 from the HistoricItem" do
         assert_equal @item.field_2, @item_history.field_2
       end
 
-      should "copy c from the HistoricItem" do
+      should "copy field_3 from the HistoricItem" do
         assert_equal @item.field_3, @item_history.field_3
       end
 
