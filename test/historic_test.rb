@@ -30,6 +30,10 @@ class HistoricTest < Test::Unit::TestCase
           assert HistoricItemHistory.exists?({:field_1=>@old_item.field_1, :field_2=>@old_item.field_2, :field_3=>@old_item.field_3})
         end
 
+        should "increment @item's version by one" do
+          assert_equal @old_item.version + 1, @item.version
+        end
+
         context ", the HistoricItemHistory" do
           setup do
             @item_history = HistoricItemHistory.find_by_field_1_and_field_2_and_field_3(@old_item.field_1, @old_item.field_2, @old_item.field_3)
@@ -53,6 +57,10 @@ class HistoricTest < Test::Unit::TestCase
           
           should "set historic_item_id reference field" do
             assert_equal @item.id, @item_history.historic_item_id
+          end
+          
+          should "have a version equal to the old item's version" do
+            assert_equal @old_item.version, @item_history.version
           end
         end #for the HistoricItemHistory
       end #when changing field_1 of HistoricIte
@@ -88,5 +96,6 @@ class HistoricTest < Test::Unit::TestCase
         # assert HistoricItemHistory.exists?({:field_1=>@item.field_1, :field_2=>@item.field_2, :field_3=>@item.field_3})
       end
     end #when destroyed
+    
   end # An item guide
 end

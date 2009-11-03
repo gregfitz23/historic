@@ -16,12 +16,14 @@ class Test::Unit::TestCase
     columns = [:field_1, :field_2, :field_3]
     create_table :historic_items do |t|
       t.string *columns
+      t.integer :version, :default => 0
     end
     
     create_table :historic_item_histories do |t|
       t.string *columns
       t.integer :position
       t.integer :historic_item_id
+      t.integer :version
     end
   end
   

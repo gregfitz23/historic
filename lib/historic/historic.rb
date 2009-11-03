@@ -39,6 +39,7 @@ module ActiveRecord
           @historic_record_class = (options.delete(:class_name) || "#{self.to_s}History").constantize  
           
           options[:on_change_of] = [options[:on_change_of]] if options[:on_change_of] && !options[:on_change_of].is_a?(Array)
+          options[:version_column] ||= :version
           @historic_options = options 
         end
         
@@ -54,6 +55,9 @@ module ActiveRecord
           
           if historic_should_move_to_history?(historic_options)
             historic_copy_to_history
+            if self.respond_to?(historic_options[:version_column])
+              self.increment(historic_options[:version_column])
+            end
           end
         end
         
