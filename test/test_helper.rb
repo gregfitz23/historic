@@ -21,6 +21,7 @@ class Test::Unit::TestCase
     create_table :historic_item_histories do |t|
       t.string *columns
       t.integer :position
+      t.integer :historic_item_id
     end
   end
   

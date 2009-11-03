@@ -30,6 +30,12 @@ module ActiveRecord
           changed_attrs_with_old_values = {}
           current.changes.each_pair {|field, value_ary| changed_attrs_with_old_values[field] = value_ary[0]}
 
+          # If a field of the form "class_name_id" exists in the history record, copy the old records id to it.
+          old_id_record_field = "#{current.class.to_s.underscore.singularize}_id"
+          if history_obj.attribute_names.include?(old_id_record_field)
+            attrs_to_copy.merge!(old_id_record_field.to_sym => current.id)
+          end
+          
           attrs_to_copy.merge!(changed_attrs_with_old_values)
           self.create(attrs_to_copy)
         end        

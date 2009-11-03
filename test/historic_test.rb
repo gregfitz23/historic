@@ -50,6 +50,10 @@ class HistoricTest < Test::Unit::TestCase
           should "clear c on the original HistoryItem" do
             assert_equal nil, @item.field_3
           end
+          
+          should "set historic_item_id reference field" do
+            assert_equal @item.id, @item_history.historic_item_id
+          end
         end #for the HistoricItemHistory
       end #when changing field_1 of HistoricIte
     end #when changing the value of :field_1 to @new_field_1
