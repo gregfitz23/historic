@@ -5,7 +5,7 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "historic"
-    gem.summary = %Q{TODO}
+    gem.summary = %Q{A gem for tracking changes of a model in a history table.}
     gem.email = "greg_fitz@yahoo.com"
     gem.homepage = "http://github.com/gregfitz23/historic"
     gem.authors = ["Greg Fitzgerald"]

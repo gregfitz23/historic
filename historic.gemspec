@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.1}
-  s.summary = %q{TODO}
+  s.summary = %q{A gem for tracking changes of a model in a history table.}
   s.test_files = [
     "test/historic_item.rb",
     "test/historic_item_history.rb",
